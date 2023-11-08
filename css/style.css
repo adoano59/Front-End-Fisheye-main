@@ -31,7 +31,7 @@ h1 {
     margin-top: 100px;
 }
 
-.photographer_section article {
+.photographer_section div {
     justify-self: center;
     display: flex;
     justify-content: center;
@@ -39,12 +39,47 @@ h1 {
     flex-direction: column;
 }
 
-.photographer_section article h2 {
+.photographer_section div h2 {
     color: #D3573C;
     font-size: 36px;
+    font-weight: 400;
+    line-height: 47px;
+    letter-spacing: 0em;
+    text-align: center;
+    
 }
-
-.photographer_section article img {
+.photographer_section div h5 {
+    color: #901C1C;
+    font-size: 13px;
+    font-weight: 400;
+    line-height: 17px;
+    letter-spacing: 0em;
+    text-align: center;
+    
+}
+.photographer_section div p {
+    color: black;
+    font-size: 10px;
+    font-weight: 400;
+    line-height: 13px;
+    letter-spacing: 0em;
+    text-align: center;
+}
+.photographer_section div h6 {
+    color: #757575;
+    font-size: 9px;
+    font-weight: 400;
+    line-height: 12px;
+    letter-spacing: 0em;
+    text-align: center;
+}
+.photographer_section img {
+    border-radius: 180px;
+    box-shadow: 0px 4px 12px 0px #00000040;
     height: 200px;
     width: 200px;
+}
+
+.photographer_section div h2, .photographer_section div h6, .photographer_section div p, .photographer_section div h5{
+    margin: 0;
 }
