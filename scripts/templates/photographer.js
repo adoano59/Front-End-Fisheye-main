@@ -33,6 +33,7 @@ function photographerTemplate(data) {
         // Ajout d'un événement de clic pour rediriger vers la page du photographe
         ficheElement.addEventListener("click", () => {
             openInNewTab(`photographer.html?id=${id}`);
+            
         });
 
         // Retourne la fiche du photographe
@@ -46,6 +47,13 @@ function photographerTemplate(data) {
         btnContact.addEventListener('click', () => {
             // Appel de la fonction pour afficher la modal avec les détails du photographe
             displayModal(photographe);
+        });
+
+        const btnEnvoyer = document.getElementById("send-message");
+        btnEnvoyer.addEventListener("click",()=>{
+            closeModal();
+            sendMessage();
+            
         });
 
         // Affichage des détails du photographe

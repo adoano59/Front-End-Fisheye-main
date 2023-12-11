@@ -1,10 +1,11 @@
 // Fonction mediaTemplate qui prend un objet de données en paramètre
-function mediaTemplate(data,photographerName) {
+function mediaTemplate(data, photographerName, medias) {
     // Destructuration de l'objet de données pour extraire les propriétés pertinentes
     const { image, video, title, likes } = data;
 
     // Fonction interne displayMedia qui prend un élément card en paramètre
-    function displayMedia(card) {
+    function displayMedia(card, index, mediaClicked) {
+
         // Sélectionne l'URL de l'image ou de la vidéo
         const url = `/Sample Photos/${photographerName}/${image || video}`;
 
@@ -16,14 +17,54 @@ function mediaTemplate(data,photographerName) {
             video.controls = true;
             const vidElement = document.createElement("video");
             vidElement.src = url;
+            vidElement.id = `${video}`;
+            vidElement.addEventListener("click", () => {
+                console.log("efefze")
+            });
             video.appendChild(vidElement);
             card.appendChild(video);
         } else if (url) {
-            // Crée un élément <a> pour l'image avec Lightbox2 et l'ajoute à la carte
             const image = document.createElement("a");
             image.href = url;
             const imgElement = document.createElement("img");
             imgElement.src = url;
+            imgElement.id = `${image}`;
+            const modalLightbox = document.getElementById("lightbox-Modal");
+            const modalImage = document.getElementById("modalImage");
+            // Ajoute un événement de clic pour ouvrir la modale
+            imgElement.addEventListener("click", (event) => {
+                event.preventDefault(); // Empêche le comportement par défaut du lien
+
+
+                // Définir la source de l'image dans la modale
+                modalImage.src = url;
+                mediaClicked=index;
+                // Afficher la modale
+                modalLightbox.style.display = 'flex';
+            });
+
+            const flecheDroite = document.querySelector(".next");
+            flecheDroite.addEventListener("click", () => {
+                console.log(index);
+                mediaClicked++
+                console.log(medias);
+                modalImage.src=`/Sample Photos/${photographerName}/${medias[mediaClicked].image || medias[mediaClicked].video}`;
+
+            })
+            const flecheGauche = document.querySelector(".previous");
+            flecheGauche.addEventListener("click", () => {
+                console.log(index);
+                mediaClicked--
+                console.log(medias);
+                modalImage.src=`/Sample Photos/${photographerName}/${medias[mediaClicked].image || medias[mediaClicked].video}`;
+
+            })
+            const close=document.querySelector(".close-modalLightBox");
+            close.addEventListener("click", () => {
+                // Cacher la modal lightbox
+                modalLightbox.style.display = 'none';
+            });
+
             image.appendChild(imgElement);
             card.appendChild(image);
         }
@@ -50,14 +91,13 @@ function mediaTemplate(data,photographerName) {
             // Incrémente le nombre de likes
             data.likes++;
             let totalLikes = document.getElementById("totalLikes");
-            let newLike = parseInt(totalLikes.innerText)+1;
-            totalLikes.innerHTML=newLike;
+            let newLike = parseInt(totalLikes.innerText) + 1;
+            totalLikes.innerHTML = newLike;
 
             // Met à jour le contenu du paragraphe avec le nouveau nombre de likes
             likesP.innerHTML = `${data.likes} <i class="fa-solid fa-heart"></i>`;
         });
-        //img je raijoute un id et je fais addeventlistenner dessus 
-        //modal
+
     }
 
     // Retourne un objet avec la fonction displayMedia

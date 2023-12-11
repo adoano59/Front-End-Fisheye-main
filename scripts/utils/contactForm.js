@@ -8,10 +8,21 @@ function displayModal(photographe) {
     const namePhotographer = document.createElement("p");
     namePhotographer.innerText = photographe.name;
     photographerName.appendChild(namePhotographer);
-    console.log(namePhotographer);
     main.style.display = "none";
     logo.style.display = "none";
+   
+}
 
+function sendMessage(){
+    const prenomUser=document.getElementById("prenom");
+    const nomUser =document.getElementById("nom");
+    const emailUser=document.getElementById("email");
+    const messageUser=document.getElementById("message");
+        console.log(prenomUser.value);
+        console.log(nomUser.value);
+        console.log(emailUser.value);
+        console.log(messageUser.value);
+    
 }
 
 function closeModal() {

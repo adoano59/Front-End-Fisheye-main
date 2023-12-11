@@ -8,8 +8,6 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
   integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w=="
   crossorigin="anonymous" referrerpolicy="no-referrer" >
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/css/lightbox.min.css">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/js/lightbox.min.js"></script>
   <title>Fisheye - photographe </title>
 </head>
 <body>
@@ -43,6 +41,13 @@
       
     </div>
   </main>
+  <div id="lightbox-Modal" class="modalLightBox">
+      <div class="previous"><i class="fa-solid fa-chevron-left"></i></div>
+      <img class="modal-content" id="modalImage">
+      <div class="next"><i class="fa-solid fa-chevron-right"></i></div>
+      <div class= "close-modalLightBox" ><i class="fa-solid fa-xmark"></i></div>
+</div>
+
   <div id="contact_modal">
     <div class="modal">
       <header>
@@ -74,7 +79,7 @@
           <textarea id="message" name="message" required></textarea>
         </div>
         
-        <button type="submit" class="contact_button">Envoyer</button>
+        <button class="contact_button" id="send-message">Envoyer</button>
       </form>
     </div>
   </div>

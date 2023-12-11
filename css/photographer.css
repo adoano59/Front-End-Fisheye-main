@@ -131,3 +131,34 @@ form textarea {
     letter-spacing: 0em;
     text-align: center;
 }
+.modalLightBox{
+    display: none; /* Cacher la modal par défaut */
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    align-items: center;
+    justify-content: center;
+    background-color: #ffffff;
+
+}
+
+#modalImage{
+    width: 1050px;
+    height: 900px;
+    border-radius: 5px;
+
+}
+.fa-chevron-right,.fa-chevron-left,.fa-xmark {
+    font-size: 50px;
+    top: 24px;
+    left: 61.64px;
+    color: #901C1C;
+}
+.close-modalLightBox{
+    position: relative;
+    top: -425px;
+    right: 30px;
+    color: #901C1C;
+}
