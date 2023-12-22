@@ -1,29 +1,31 @@
 <!DOCTYPE html>
 <html>
+
 <head>
   <link href="css/style.css" rel="stylesheet" type="text/css" />
   <meta charset="utf-8">
   <link rel="icon" type="image/png" href="assets/favicon.png">
   <link href="https://fonts.googleapis.com/css?family=DM+Sans&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
-  integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w=="
-  crossorigin="anonymous" referrerpolicy="no-referrer" >
+    integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w=="
+    crossorigin="anonymous" referrerpolicy="no-referrer">
   <title>Fisheye - photographe </title>
 </head>
+
 <body>
   <header>
     <img src="assets/images/logo.png" class="logo" />
   </header>
   <main id="main">
     <div class="photograph-header">
-      
+
       <div class="profil">
-        
-        
+
+
       </div>
-      
+
       <button class="contact_button">Contactez-moi</button>
-      
+
       <div class="portrait"></div>
     </div>
     <div class="globalLikes">
@@ -35,52 +37,58 @@
         <option value="date">Date</option>
         <option value="title">Titre</option>
       </select>
-      
+
     </div>
     <div class="media">
-      
+
     </div>
   </main>
+
   <div id="lightbox-Modal" class="modalLightBox">
-      <div class="previous"><i class="fa-solid fa-chevron-left"></i></div>
-      <img class="modal-content" id="modalImage">
-      <div class="next"><i class="fa-solid fa-chevron-right"></i></div>
-      <div class= "close-modalLightBox" ><i class="fa-solid fa-xmark"></i></div>
+    <div class="previous"><i class="fa-solid fa-chevron-left"></i></div>
+    <img class="modal-content" id="modalImage" />
+    <video class="modal-content" id="modalVideo"></video>
+    <div class="next"><i class="fa-solid fa-chevron-right"></i></div>
+    <div class="close-modalLightBox"><i class="fa-solid fa-xmark"></i></div>
+  <span class="media-title"></span>
 </div>
 
   <div id="contact_modal">
     <div class="modal">
       <header>
         <div class="contact-name">
-        <h2>Contactez-moi</h2>
-        <div class="photographer_name">
+          <h2>Contactez-moi</h2>
+          <div class="photographer_name">
+          </div>
         </div>
-      </div>
         <img src="assets/icons/close.svg" onclick="closeModal()" />
       </header>
-      <form  action="" method="POST">
+      <form action="" method="POST">
         <div>
           <label for="prenom">Prénom</label>
           <input type="text" id="prenom" name="prenom" required />
         </div>
-        
+        <div class="erreurPrenom"></div>
+
         <div>
           <label for="nom">Nom</label>
           <input type="text" id="nom" name="nom" required />
         </div>
-        
+        <div class="erreurNom"></div>
+
         <div>
           <label for="email">Email</label>
           <input type="email" id="email" name="email" required />
         </div>
-        
+        <div class="erreurMail"></div>
+
         <div>
           <label for="message">Message</label>
           <textarea id="message" name="message" required></textarea>
         </div>
-        
-        <button class="contact_button" id="send-message">Envoyer</button>
       </form>
+      <button class="send_button" id="send-message">Envoyer</button>
+
     </div>
   </div>
   <script src="scripts/templates/media.js"></script>
@@ -88,4 +96,5 @@
   <script src="/scripts/pages/photographer.js"></script>
   <script src="/scripts/utils/contactForm.js"></script>
 </body>
+
 </html>

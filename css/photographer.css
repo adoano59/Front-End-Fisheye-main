@@ -13,6 +13,7 @@
 
 
 .contact_button,
+.send_button,
 #sortSelect {
     font-size: 20px;
     font-weight: 700;
@@ -131,8 +132,10 @@ form textarea {
     letter-spacing: 0em;
     text-align: center;
 }
-.modalLightBox{
-    display: none; /* Cacher la modal par défaut */
+
+.modalLightBox {
+    display: none;
+    /* Cacher la modal par défaut */
     position: fixed;
     top: 0;
     bottom: 0;
@@ -144,21 +147,42 @@ form textarea {
 
 }
 
-#modalImage{
-    width: 1050px;
-    height: 900px;
+#modalImage,
+#modalVideo {
+    width: 700px;
+    height: 600px;
     border-radius: 5px;
 
 }
-.fa-chevron-right,.fa-chevron-left,.fa-xmark {
+
+.fa-chevron-right,
+.fa-chevron-left,
+.fa-xmark {
     font-size: 50px;
     top: 24px;
     left: 61.64px;
     color: #901C1C;
 }
-.close-modalLightBox{
+
+.close-modalLightBox {
     position: relative;
-    top: -425px;
+    top: -283px;
     right: 30px;
     color: #901C1C;
 }
+.media-title{
+    position: relative;
+    bottom: -315px;
+    left: -769px;
+    color: #901C1C;
+    font-family: DM Sans;
+    font-size: 24px;
+    font-weight: 400;
+    line-height: 31px;
+    letter-spacing: 0em;
+    text-align: left;
+}
+.erreurNom, .erreurPrenom, .erreurMail, .erreurMessage{
+    color: red;
+    
+  }
