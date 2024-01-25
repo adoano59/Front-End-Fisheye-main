@@ -82,6 +82,29 @@ email.addEventListener("focusin", () => {
 email.addEventListener("focusout", verifMail);
 
 
+//validation Message
+const message = document.getElementById("message");
+function verifMessage() {
+    const regexMessage = /^[a-zA-Z0-9.,!?:;' \n\r\t]{2,2000}$/;
+    const erreurMessage = ("Veuillez entrer un message Valide.");
+    if (regexMessage.test(message.value)) {
+        return true;
+    } else {
+        const messageErreur = document.querySelector(".erreurMessage");
+        let span = `<span> ${erreurMessage} </span>`;
+        messageErreur.innerHTML = span;
+        return false;
+    }
+}
+//a l'entree au textarea message
+message.addEventListener("focusin", () => {
+    const spanRemove = document.querySelector(".erreurMessage");
+    span = ``;
+    spanRemove.innerHTML = span;
+})
+// a la sortie du textarea message
+message.addEventListener("focusout", verifMessage);
+
 function sendMessage() {
     const prenomUser = document.getElementById("prenom");
     const nomUser = document.getElementById("nom");
@@ -91,9 +114,27 @@ function sendMessage() {
     console.log(nomUser.value);
     console.log(emailUser.value);
     console.log(messageUser.value);
-
 }
+// Sélection du bouton de contact
+const btnContact = document.querySelector(".contact_button");
+//fontion pour effacer le formulaire
+function resetData() {
+    document.getElementById("formulaireContact").reset();
+};
 
+btnContact.addEventListener('click', () => {
+    // Appel de la fonction pour afficher la modal contact avec les détails du photographe
+    displayModal(photographe);
+});
+//validation et envoi message via formulaire contact
+const btnEnvoyer = document.getElementById("send-message");
+btnEnvoyer.addEventListener("click", () => {
+    if (verifNomPrenom(true) && verifNomPrenom(false) && verifMail() && verifMessage()) {
+        closeModal();
+        sendMessage();
+        resetData();
+    }
+});
 function closeModal() {
     const logo = document.querySelector(".logo")
     const main = document.querySelector("main");
@@ -102,3 +143,9 @@ function closeModal() {
     main.style.display = "block";
     logo.style.display = "block";
 }
+
+document.querySelector('#closeModal').addEventListener('keypress', function (e) {
+    if (e.key === 'Enter') {
+        closeModal()
+    }
+});

@@ -14,115 +14,47 @@ function mediaTemplate(data, photographerName, medias) {
 
         // Vérifie si l'URL se termine par ".mp4", ce qui indique une vidéo
         if (url && url.endsWith(".mp4")) {
-            // Crée un élément <a> pour la vidéo avec des contrôles et l'ajoute à la carte
-            const videoLink = document.createElement("a");
-            videoLink.href = url;
+            const videoLink = document.createElement("div");
+            videoLink.tabIndex = 0;
             videoLink.controls = true;
             const vidElement = document.createElement("video");
             vidElement.src = url;
+            vidElement.alt = title;
             vidElement.id = `${videoLink}`;
-            vidElement.addEventListener("click", (event) => {
-                event.preventDefault(); // Empêche le comportement par défaut du lien
-                // Définir la source de l'image dans la modale
-                modalImage.src = url;
-                mediaClicked = index;
-                // Afficher la modale
-                modalLightbox.style.display = 'flex';
+            //declaration titre du media
+            const titleMedia = document.querySelector(".media-title");
+            videoLink.addEventListener("keypress", (event) => {
+                if (event.key === 'Enter') {
+                    interactionLightBox(modalImage, modalVideo, mediaClicked, titleMedia, modalLightbox, url, index);
+                }
             });
+            vidElement.addEventListener("click", () => {
+                interactionLightBox(modalImage, modalVideo, mediaClicked, titleMedia, modalLightbox, url, index)
+
+            });
+
             videoLink.appendChild(vidElement);
             card.appendChild(videoLink);
         } else if (url) {
-            const imageLink = document.createElement("a");
-            imageLink.href = url;
+            const imageLink = document.createElement("div");
+            imageLink.tabIndex = 0;
             const imgElement = document.createElement("img");
             imgElement.src = url;
+            //alt pour l'accessibilité
+            imgElement.alt = title;
             imgElement.id = `${image}`;
             //declaration titre du media
             const titleMedia = document.querySelector(".media-title");
             // Ajoute un événement de clic pour ouvrir la modale
-            imgElement.addEventListener("click", (event) => {
-                event.preventDefault(); // Empêche le comportement par défaut du lien
-                // Définir la source de l'image dans la modale
-                modalImage.src = url;
-                modalVideo.src = url;
-                if (image) {
-                    modalImage.style.display = "block";
-                    modalVideo.style.display = "none";
-                    titleMedia.innerHTML = `${title}`;
-
-                } else {
-                    modalImage.style.display = "none";
-                    modalVideo.style.display = "block";
-                    titleMedia.innerHTML = `${title}`;
+            imageLink.addEventListener("keypress", (event) => {
+                if (event.key === 'Enter') {
+                    interactionLightBox(modalImage, modalVideo, mediaClicked, titleMedia, modalLightbox, url, index);
                 }
-                mediaClicked = index;
-                // Afficher la modale
-                modalLightbox.style.display = 'flex';
-                const flecheDroite = document.querySelector(".next");
-                if (mediaClicked + 1 >= medias.length) {
-                    flecheDroite.style.display = 'none';
-                }
-                else{
-                    flecheDroite.style.display = 'block';
-                }
-                flecheDroite.addEventListener("click", () => {
-                    flecheGauche.style.display='block';
-                    compteur++;
-                    //const finListMedia = mediaClicked++;
-                    modalImage.src = `/Sample Photos/${photographerName}/${medias[mediaClicked + compteur].image}`;
-                    modalVideo.src = `/Sample Photos/${photographerName}/${medias[mediaClicked + compteur].video}`;
-                    if (medias[mediaClicked + compteur].image) {
-                        modalImage.style.display = "block";
-                        modalVideo.style.display = "none";
-                        titleMedia.innerHTML = `${medias[mediaClicked + compteur].title}`;
-
-                    } else {
-                        modalImage.style.display = "none";
-                        modalVideo.style.display = "block";
-                        titleMedia.innerHTML = `${medias[mediaClicked + compteur].title}`;
-                    };
-                    if (mediaClicked + compteur < medias.length - 1) {
-                        flecheDroite.style.display = 'block';
-                    }
-                    else {
-                        flecheDroite.style.display = 'none';
-                    }
-                });
-                const flecheGauche = document.querySelector(".previous");
-                if (mediaClicked <= 0) {
-                    flecheGauche.style.display = 'none';
-                }
-                else{
-                    flecheGauche.style.display = 'block';
-                }
-                flecheGauche.addEventListener("click", () => {
-                    flecheDroite.style.display='block';
-                    compteur--
-                    modalImage.src = `/Sample Photos/${photographerName}/${medias[mediaClicked + compteur].image}`;
-                    modalVideo.src = `/Sample Photos/${photographerName}/${medias[mediaClicked + compteur].video}`;
-                    if (medias[mediaClicked + compteur].image) {
-                        modalImage.style.display = "block";
-                        modalVideo.style.display = "none";
-                        titleMedia.innerHTML = `${medias[mediaClicked + compteur].title}`;
-
-                    } else {
-                        modalImage.style.display = "none";
-                        modalVideo.style.display = "block";
-                        titleMedia.innerHTML = `${medias[mediaClicked + compteur].title}`;
-                    };
-                    if (mediaClicked + compteur > 0) {
-                        flecheGauche.style.display = 'block';
-                    }
-                    else {
-                        flecheGauche.style.display = 'none';
-                    }
-
-                });
             });
+            imgElement.addEventListener("click", () => {
+                interactionLightBox(modalImage, modalVideo, mediaClicked, titleMedia, modalLightbox, url, index)
 
-
-
-
+            });
             const close = document.querySelector(".close-modalLightBox");
             close.addEventListener("click", () => {
                 // Cacher la modal lightbox
@@ -141,6 +73,7 @@ function mediaTemplate(data, photographerName, medias) {
 
         // Crée un titre <h5> avec le texte du titre et l'ajoute à la description
         const titleH5 = document.createElement("h5");
+        titleH5.tabIndex = 0;
         titleH5.innerText = title;
         descripCard.appendChild(titleH5);
 
@@ -148,7 +81,8 @@ function mediaTemplate(data, photographerName, medias) {
         const btnLike = document.createElement("button");
         btnLike.className = 'bouton-like';
         const likesP = document.createElement("p");
-        likesP.innerHTML = `${likes} <i class="fa-solid fa-heart"></i>`;
+        likesP.ariaLabel = "likes";
+        likesP.innerHTML = `${likes} <i class="fa-solid fa-heart" ></i>`;
         descripCard.appendChild(btnLike);
         btnLike.appendChild(likesP);
 
@@ -165,6 +99,104 @@ function mediaTemplate(data, photographerName, medias) {
         });
 
     }
+    function interactionLightBox(modalImage, modalVideo, mediaClicked, titleMedia, modalLightbox, url, index) {
+        // Définir la source de l'image dans la modale
+        modalImage.src = url;
+        modalVideo.src = url;
+        if (image) {
+            modalImage.style.display = "block";
+            modalVideo.style.display = "none";
+            titleMedia.innerHTML = `${title}`;
+
+        } else {
+            modalImage.style.display = "none";
+            modalVideo.style.display = "block";
+            titleMedia.innerHTML = `${title}`;
+        }
+        mediaClicked = index;
+        // Afficher la modale
+        modalLightbox.style.display = 'flex';
+        const flecheDroite = document.querySelector(".next");
+        const flecheGauche = document.querySelector(".previous");
+        if (mediaClicked + 1 >= medias.length) {
+            flecheDroite.style.display = 'none';
+        }
+        else {
+            flecheDroite.style.display = 'block';
+        }
+        document.addEventListener("keydown", (e) => {
+
+            if (e.key === 'ArrowRight') {
+                arrowRight();
+            }
+            else if (e.key === 'ArrowLeft') {
+                arrowLeft();
+            }
+            else if (e.key === 'Escape') {
+                modalLightbox.style.display = 'none';
+                compteur = 0;
+                mediaClicked = 0;
+            }
+        });
+        flecheDroite.addEventListener("click", () => {
+            arrowRight();
+        });
+        if (mediaClicked <= 0) {
+            flecheGauche.style.display = 'none';
+        }
+        else {
+            flecheGauche.style.display = 'block';
+        }
+        flecheGauche.addEventListener("click", () => {
+            arrowLeft();
+        });
+        function arrowLeft() {
+            flecheDroite.style.display = 'block';
+            compteur--
+            modalImage.src = `/Sample Photos/${photographerName}/${medias[mediaClicked + compteur].image}`;
+            modalVideo.src = `/Sample Photos/${photographerName}/${medias[mediaClicked + compteur].video}`;
+            if (medias[mediaClicked + compteur].image) {
+                modalImage.style.display = "block";
+                modalVideo.style.display = "none";
+                titleMedia.innerHTML = `${medias[mediaClicked + compteur].title}`;
+
+            } else {
+                modalImage.style.display = "none";
+                modalVideo.style.display = "block";
+                titleMedia.innerHTML = `${medias[mediaClicked + compteur].title}`;
+            };
+            if (mediaClicked + compteur > 0) {
+                flecheGauche.style.display = 'block';
+            }
+            else {
+                flecheGauche.style.display = 'none';
+            }
+
+        };
+        function arrowRight() {
+            flecheGauche.style.display = 'block';
+            compteur++;
+            modalImage.src = `/Sample Photos/${photographerName}/${medias[mediaClicked + compteur].image}`;
+            modalVideo.src = `/Sample Photos/${photographerName}/${medias[mediaClicked + compteur].video}`;
+            if (medias[mediaClicked + compteur].image) {
+                modalImage.style.display = "block";
+                modalVideo.style.display = "none";
+                titleMedia.innerHTML = `${medias[mediaClicked + compteur].title}`;
+
+            } else {
+                modalImage.style.display = "none";
+                modalVideo.style.display = "block";
+                titleMedia.innerHTML = `${medias[mediaClicked + compteur].title}`;
+            };
+            if (mediaClicked + compteur < medias.length - 1) {
+                flecheDroite.style.display = 'block';
+            }
+            else {
+                flecheDroite.style.display = 'none';
+            }
+        };
+
+    };
 
     // Retourne un objet avec la fonction displayMedia
     return { displayMedia };

@@ -14,7 +14,9 @@
 
 <body>
   <header>
-    <img src="assets/images/logo.png" class="logo" />
+    <a href="index.html">
+      <img src="assets/images/logo.png" class="logo" alt="Fisheye Home page" />
+    </a>
   </header>
   <main id="main">
     <div class="photograph-header">
@@ -31,7 +33,7 @@
     <div class="globalLikes">
     </div>
     <div class="tri">
-      <label for="sortSelect">Trier par</label>
+      <label for="sortSelect" tabindex="0">Trier par</label>
       <select id="sortSelect">
         <option value="popularity">Popularité</option>
         <option value="date">Date</option>
@@ -44,14 +46,14 @@
     </div>
   </main>
 
-  <div id="lightbox-Modal" class="modalLightBox">
+  <div id="lightbox-Modal" class="modalLightBox" tabindex="0">
     <div class="previous"><i class="fa-solid fa-chevron-left"></i></div>
     <img class="modal-content" id="modalImage" />
-    <video class="modal-content" id="modalVideo"></video>
+    <video class="modal-content" id="modalVideo" controls></video>
     <div class="next"><i class="fa-solid fa-chevron-right"></i></div>
     <div class="close-modalLightBox"><i class="fa-solid fa-xmark"></i></div>
-  <span class="media-title"></span>
-</div>
+    <span class="media-title"></span>
+  </div>
 
   <div id="contact_modal">
     <div class="modal">
@@ -61,9 +63,9 @@
           <div class="photographer_name">
           </div>
         </div>
-        <img src="assets/icons/close.svg" onclick="closeModal()" />
+
       </header>
-      <form action="" method="POST">
+      <form name="formulaire_contact" id="formulaireContact" action="" method="POST">
         <div>
           <label for="prenom">Prénom</label>
           <input type="text" id="prenom" name="prenom" required />
@@ -86,8 +88,11 @@
           <label for="message">Message</label>
           <textarea id="message" name="message" required></textarea>
         </div>
+        <div class="erreurMessage"></div>
       </form>
       <button class="send_button" id="send-message">Envoyer</button>
+      <img src="assets/icons/close.svg" id="closeModal" alt="Fermer" tabindex="0" role="button"
+        onclick="closeModal()" />
 
     </div>
   </div>
